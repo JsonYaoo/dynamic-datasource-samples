@@ -45,6 +45,7 @@
         <module>tx-local-sample</module>
         <module>tx-atomikos-sample</module>
         <module>tx-seata-sample</module>
+        <module>tx-eureka-seata-sample</module>
     </modules>
 
     <dependencyManagement>
