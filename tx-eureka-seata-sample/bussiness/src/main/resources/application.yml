@@ -29,17 +29,128 @@ eureka:
 seata:
   enabled: true
   application-id: business-service
+  # 事务群组（可以每个应用独立取名，也可以使用相同的名字）
   tx-service-group: my_test_tx_group
   #一定要是false
   enable-auto-data-source-proxy: false
+#  use-jdk-proxy: false
+  client:
+    rm:
+      # 异步提交缓存队列长度（默认10000）
+      async-commit-buffer-limit: 1000
+      # 一阶段结果上报TC重试次数（默认5）
+      report-retry-count: 5
+      # 自动刷新缓存中的表结构（默认false）
+      table-meta-check-enable: false
+      report-success-enable: false
+      lock:
+        # 校验或占用全局锁重试间隔（默认10ms）
+        retry-interval: 10
+        # 校验或占用全局锁重试次数（默认30）
+        retry-times: 30
+        # 分支事务与其它全局回滚事务冲突时锁策略（优先释放本地锁让回滚成功）
+        retry-policy-branch-rollback-on-conflict: true
+    tm:
+      # 一阶段全局提交结果上报TC重试次数（默认1次，建议大于1）
+      commit-retry-count: 5
+      # 一阶段全局回滚结果上报TC重试次数（默认1次，建议大于1）
+      rollback-retry-count: 5
+    undo:
+      # 二阶段回滚镜像校验（默认true开启）
+      data-validation: true
+      # undo序列化方式（默认jackson）
+      log-serialization: jackson
+      # 自定义undo表名（默认undo_log）
+      log-table: undo_log
+    log:
+      # 日志异常输出概率（默认100）
+      exceptionRate: 100
   service:
     vgroup-mapping:
-      #key与上面的tx-service-group的值对应
+      # TC 集群（必须与seata-server保持一致）
       my_test_tx_group: default
     grouplist:
-      #seata-server地址仅file注册中心需要
-      default: localhost:8091
-  config:
-    type: file
+      default: 127.0.0.1:8091
+    # 降级开关
+#    enable-degrade: false
+    # 禁用全局事务（默认false）
+#    disable-global-transaction: false
+  transport:
+    shutdown:
+      wait: 3
+    thread-factory:
+      boss-thread-prefix: NettyBoss
+      worker-thread-prefix: NettyServerNIOWorker
+      server-executor-thread-prefix: NettyServerBizHandler
+      share-boss-worker: false
+      client-selector-thread-prefix: NettyClientSelector
+      client-selector-thread-size: 1
+      client-worker-thread-prefix: NettyClientWorkerThread
+      worker-thread-size: default
+      boss-thread-size: 1
+    type: TCP
+    server: NIO
+    heartbeat: true
+    serialization: seata
+    compressor: none
+    # 客户端事务消息请求是否批量合并发送（默认true）
+    enable-client-batch-send-request: true
   registry:
+    # file 、nacos 、eureka、redis、zk、consul、etcd3、sofa
+    type: eureka
+    nacos:
+      cluster: default
+      server-addr: localhost
+      namespace:
+    eureka:
+      application: default
+      weight: 1
+      service-url: http://localhost:8761/eureka
+    redis:
+      server-addr: localhost:6379
+      db: 0
+      password:
+      cluster: default
+      timeout: 0
+    zk:
+      cluster: default
+      server-addr: 127.0.0.1:2181
+      session-timeout: 6000
+      connect-timeout: 2000
+      username: ""
+      password: ""
+    consul:
+      cluster: default
+      server-addr: 127.0.0.1:8500
+    etcd3:
+      cluster: default
+      serverAddr: http://localhost:2379
+    sofa:
+      server-addr: 127.0.0.1:9603
+      application: default
+      region: DEFAULT_ZONE
+      datacenter: DefaultDataCenter
+      cluster: default
+      group: SEATA_GROUP
+      addressWaitTime: 3000
+  config:
+    # file、nacos 、apollo、zk、consul、etcd3、springCloudConfig
     type: file
+    nacos:
+      namespace:
+      serverAddr: localhost
+      group: SEATA_GROUP
+    consul:
+      server-addr: 127.0.0.1:8500
+    apollo:
+      apollo-meta: http://192.168.1.204:8801
+      app-id: seata-server
+      namespace: application
+    zk:
+      server-addr: 127.0.0.1:2181
+      session-timeout: 6000
+      connect-timeout: 2000
+      username: ""
+      password: ""
+    etcd3:
+      server-addr: http://localhost:2379

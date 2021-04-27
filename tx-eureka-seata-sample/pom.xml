@@ -17,7 +17,7 @@
         <module>storage</module>
     </modules>
     <artifactId>tx-eureka-seata-sample</artifactId>
-    <description>springcloud + dynamic data source + druid + mybatis-plus + seata</description>
+    <description>springcloud + dynamic data source + seata</description>
 
     <dependencyManagement>
         <dependencies>
