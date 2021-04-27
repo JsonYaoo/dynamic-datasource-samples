@@ -3,8 +3,8 @@ package io.seata.sample.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import io.seata.sample.entity.AccountTbl;
-import io.seata.sample.service.IAccountTblService;
+import io.seata.sample.entity.StorageTbl;
+import io.seata.sample.service.IStorageTblService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,15 +23,15 @@ import java.util.List;
  * @since 2021-04-27
  */
 @RestController
-@RequestMapping("/account")
-public class AccountTblController {
+@RequestMapping("/storage")
+public class StorageTblController {
 
     @Autowired
-    private IAccountTblService iAccountTblService;
+    private IStorageTblService iStorageTblService;
 
-    @RequestMapping(value = "/reduce", produces = "application/json")
-    public Boolean debit(String userId, int money) {
-        iAccountTblService.reduce(userId, money);
+    @RequestMapping(value = "/deduct", produces = "application/json")
+    public Boolean deduct(String commodityCode, int count) {
+        iStorageTblService.deduct(commodityCode, count);
         return true;
     }
 
@@ -40,18 +40,18 @@ public class AccountTblController {
     * @param id
     */
     @RequestMapping("/get")
-    public AccountTbl get(Long id) {
+    public StorageTbl get(Long id) {
         Assert.notNull(id, "id不能为空");
-        return iAccountTblService.getById(id);
+        return iStorageTblService.getById(id);
     }
 
     /**
     * 新增
-    * @param accountTbl
+    * @param storageTbl
     */
     @PostMapping("/add")
-    public void add(@RequestBody AccountTbl accountTbl) {
-        iAccountTblService.save(accountTbl);
+    public void add(@RequestBody StorageTbl storageTbl) {
+        iStorageTblService.save(storageTbl);
     }
     
     /**
@@ -61,32 +61,32 @@ public class AccountTblController {
     @RequestMapping("/delete")
     public void delete(Long id) {
         Assert.notNull(id, "id不能为空");
-        iAccountTblService.removeById(id);
+        iStorageTblService.removeById(id);
     }
 
     /**
     * 修改
-    * @param accountTbl
+    * @param storageTbl
     */
     @PostMapping("/modify")
-    public void modify(@RequestBody AccountTbl accountTbl) {
-        iAccountTblService.updateById(accountTbl);
+    public void modify(@RequestBody StorageTbl storageTbl) {
+        iStorageTblService.updateById(storageTbl);
     }
 
     /**
     * 分页查询
-    * @param accountTbl
+    * @param storageTbl
     * @param pageNum
     * @param pageSize
     * @return
     */
     @RequestMapping("/listPage")
-    public PageInfo<AccountTbl> listPage(AccountTbl accountTbl, Integer pageNum, Integer pageSize) {
+    public PageInfo<StorageTbl> listPage(StorageTbl storageTbl, Integer pageNum, Integer pageSize) {
         pageNum = pageNum == null ? 1 : pageNum;
         pageSize = pageSize == null ? 10 : pageSize;
         PageHelper.startPage(pageNum, pageSize);
-        QueryWrapper<AccountTbl> wrapper = new QueryWrapper<AccountTbl>(accountTbl);
-        return new PageInfo<AccountTbl>(iAccountTblService.list(wrapper));
+        QueryWrapper<StorageTbl> wrapper = new QueryWrapper<StorageTbl>(storageTbl);
+        return new PageInfo<StorageTbl>(iStorageTblService.list(wrapper));
     }
 
     /**
@@ -94,8 +94,8 @@ public class AccountTblController {
     * @return
     */
     @RequestMapping("/listAll")
-    public List<AccountTbl> listAll() { 
-        return iAccountTblService.list();
+    public List<StorageTbl> listAll() { 
+        return iStorageTblService.list();
     }
  
 }

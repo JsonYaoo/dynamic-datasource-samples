@@ -1,6 +1,14 @@
 server:
   port: 8086
 
+eureka:
+  instance:
+    hostname: 127.0.0.1
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+      
 spring:
   application:
     name: storage-service
@@ -18,13 +26,17 @@ spring:
           password: root
           url: jdbc:mysql://localhost:3306/fescar?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
           driver-class-name: com.mysql.jdbc.Driver
-eureka:
-  instance:
-    hostname: 127.0.0.1
-    prefer-ip-address: true
-  client:
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+      druid:
+        test-while-idle: true
+        test-on-borrow: true
+        validation-query: SELECT 1
+        time-between-eviction-runs-millis: 300000
+        min-evictable-idle-time-millis: 1800000
+    type: com.alibaba.druid.pool.DruidDataSource
+    
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  config-location: classpath:/mybatis/config/mybatis-config.xml
 
 seata:
   enabled: true

@@ -1,8 +1,9 @@
-package io.seata.sample.service;
+package io.seata.sample.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.seata.sample.entity.AccountTbl;
 import io.seata.sample.mapper.AccountTblMapper;
+import io.seata.sample.service.IAccountTblService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
