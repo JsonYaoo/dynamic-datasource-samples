@@ -12,7 +12,7 @@ import javax.sql.DataSource;
  * @author jimin.jm@alibaba-inc.com
  * @date 2019/06/14
  */
-@Configuration
+//@Configuration
 public class DataSourceConfiguration {
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource")
