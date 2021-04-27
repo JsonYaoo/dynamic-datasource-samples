@@ -46,6 +46,7 @@
         <module>tx-atomikos-sample</module>
         <module>tx-seata-sample</module>
         <module>tx-eureka-seata-sample</module>
+        <module>tx-eureka-mybatisplus-seata-sample</module>
     </modules>
 
     <dependencyManagement>

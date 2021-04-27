@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>dynamic-datasource-samples</artifactId>
+        <groupId>com.baomidou</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>tx-eureka-mybatisplus-seata-sample</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>mp-account</module>
+        <module>mp-bussiness</module>
+        <module>mp-eureka</module>
+        <module>mp-order</module>
+        <module>mp-storage</module>
+    </modules>
+    <description>springcloud + dynamic data source + druid + mybatis-plus + seata</description>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Hoxton.SR11</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
+                <version>2.2.1.RELEASE</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.seata</groupId>
+                <artifactId>seata-spring-boot-starter</artifactId>
+                <version>1.4.0</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
