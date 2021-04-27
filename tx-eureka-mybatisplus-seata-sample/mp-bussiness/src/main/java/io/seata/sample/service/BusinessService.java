@@ -54,6 +54,7 @@ public class BusinessService {
         jdbcTemplate.update("delete from storage_tbl");
         jdbcTemplate.update("insert into account_tbl(user_id,money) values('U100000','10000') ");
         jdbcTemplate.update("insert into storage_tbl(commodity_code,count) values('C100000','200') ");
+        System.err.println("db is inited...");
     }
 
     public boolean validData() {

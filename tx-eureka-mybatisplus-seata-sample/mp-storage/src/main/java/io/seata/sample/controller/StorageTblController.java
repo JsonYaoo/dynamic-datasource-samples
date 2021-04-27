@@ -30,7 +30,7 @@ public class StorageTblController {
     private IStorageTblService iStorageTblService;
 
     @RequestMapping(value = "/deduct", produces = "application/json")
-    public Boolean deduct(String commodityCode, int count) {
+    public Boolean deduct(String commodityCode, Integer count) {
         iStorageTblService.deduct(commodityCode, count);
         return true;
     }

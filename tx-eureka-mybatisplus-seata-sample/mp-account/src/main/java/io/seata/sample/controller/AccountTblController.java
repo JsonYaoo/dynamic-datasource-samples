@@ -30,7 +30,7 @@ public class AccountTblController {
     private IAccountTblService iAccountTblService;
 
     @RequestMapping(value = "/reduce", produces = "application/json")
-    public Boolean debit(String userId, int money) {
+    public Boolean debit(String userId, Integer money) {
         iAccountTblService.reduce(userId, money);
         return true;
     }

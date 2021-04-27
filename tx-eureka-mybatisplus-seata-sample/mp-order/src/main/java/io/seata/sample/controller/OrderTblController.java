@@ -27,7 +27,7 @@ public class OrderTblController {
     private IOrderTblService iOrderTblService;
 
     @GetMapping(value = "/create", produces = "application/json")
-    public Boolean create(String userId, String commodityCode, int count) {
+    public Boolean create(String userId, String commodityCode, Integer count) {
         iOrderTblService.create(userId, commodityCode, count);
         return true;
     }
