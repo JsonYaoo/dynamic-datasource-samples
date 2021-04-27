@@ -10,4 +10,11 @@ public interface OrderService {
      * @param placeOrderRequest 订单请求参数
      */
     void placeOrder(PlaceOrderRequest placeOrderRequest);
+
+    /**
+     * 直接测试订单
+     *
+     * @param placeOrderRequest
+     */
+    void testOrder(PlaceOrderRequest placeOrderRequest);
 }

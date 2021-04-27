@@ -38,4 +38,18 @@ public class OrderController {
         orderService.placeOrder(new PlaceOrderRequest(1L, 1L, 6));
         return "下单成功";
     }
+
+    @PostMapping("/testSuccess")
+    @ApiOperation("直接测试订单-正常情况")
+    public String testSuccess() {
+        orderService.testOrder(new PlaceOrderRequest(1L, 1L, 1));
+        return "正常情况";
+    }
+
+    @PostMapping("/testFail")
+    @ApiOperation("直接测试订单-异常情况")
+    public String testFail() {
+        orderService.testOrder(new PlaceOrderRequest(1L, 1L, 2));
+        return "异常情况";
+    }
 }

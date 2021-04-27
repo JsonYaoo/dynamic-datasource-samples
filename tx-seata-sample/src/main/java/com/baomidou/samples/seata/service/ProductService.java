@@ -10,4 +10,13 @@ public interface ProductService {
      * @return 商品总价
      */
     Double reduceStock(Long productId, Integer amount);
+
+    /**
+     * 直接测试产品
+     *
+     * @param productId
+     * @param amount
+     * @return
+     */
+    Double testProduct(Long productId, Integer amount);
 }

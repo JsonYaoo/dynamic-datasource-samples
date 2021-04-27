@@ -8,4 +8,12 @@ public interface AccountService {
      */
     void reduceBalance(Long userId, Double price);
 
+    /**
+     * 直接测试账户
+     *
+     * @param userId
+     * @param price
+     */
+    void testAccount(Long userId, Double price);
+
 }
