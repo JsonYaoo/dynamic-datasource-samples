@@ -5,6 +5,7 @@ import io.seata.sample.entity.OrderTbl;
 import io.seata.sample.feign.UserFeignClient;
 import io.seata.sample.mapper.OrderTblMapper;
 import io.seata.sample.service.IOrderTblService;
+import io.seata.spring.annotation.GlobalLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,7 @@ public class OrderTblServiceImpl extends ServiceImpl<OrderTblMapper, OrderTbl> i
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @GlobalLock
     @Transactional(rollbackFor = {Exception.class})
     public void create(String userId, String commodityCode, int count) {
         int orderMoney = count * 100;

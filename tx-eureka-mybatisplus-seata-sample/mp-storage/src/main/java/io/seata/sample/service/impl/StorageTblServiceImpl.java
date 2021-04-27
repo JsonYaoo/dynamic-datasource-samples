@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.seata.sample.entity.StorageTbl;
 import io.seata.sample.mapper.StorageTblMapper;
 import io.seata.sample.service.IStorageTblService;
+import io.seata.spring.annotation.GlobalLock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class StorageTblServiceImpl extends ServiceImpl<StorageTblMapper, Storage
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @GlobalLock
     @Transactional(rollbackFor = {Exception.class})
     public void deduct(String commodityCode, int count) {
         jdbcTemplate.update("update storage_tbl set count = count - ? where commodity_code = ?",
