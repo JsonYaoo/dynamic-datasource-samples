@@ -27,6 +27,12 @@ spring:
           password: root
           url: jdbc:mysql://localhost:3306/fescar?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
           driver-class-name: com.mysql.jdbc.Driver
+        test:
+          username: root
+          password: root
+          url: jdbc:mysql://localhost:3306/seata?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+          driver-class-name: com.mysql.jdbc.Driver
+          seata: false #这个数据源不需要seata
       druid:
         test-while-idle: true
         test-on-borrow: true
